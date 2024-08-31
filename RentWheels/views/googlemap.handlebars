@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <title>Add Map</title>
+    {{!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script> --}}
+
+    <style>
+           /* Set the size of the div element that contains the map */
+            #map {
+            height: 600px;
+            /* The height is 400 pixels */
+            width: 100%;
+            /* The width is the width of the web page */
+            }
+    </style>
+
+
+
+
+  </head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
+
+    <!-- 
+     The `defer` attribute causes the callback to execute after the full HTML
+     document has been parsed. For non-blocking uses, avoiding race conditions,
+     and consistent behavior across browsers, consider loading using Promises
+     with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+    -->
+
+    <script>
+        // Initialize and add the map
+        $(document).ready(function initMap() {
+        // The location of Uluru
+        const uluru = { lat: 19.0759837, lng: 72.8776559};
+        // The map, centered at Uluru
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 4,
+            center: uluru,
+        });
+
+        var socket=io(); 
+        socket.on('allcars',function(cars){
+          console.log('Allcars',cars);
+
+          for(var i=0;i<cars.cars.length;i++){
+            console.log(cars.cars[i]);
+            function addMarker(){
+                const marker = new google.maps.Marker({
+                position: {lat:cars.cars[i].coords.lat,lng:cars.cars[i].coords.lng},
+                map: map,
+                });
+
+                var infoWindow=new google.maps.InfoWindow({
+                  content: `<a href="/displayCar/${cars.cars[i]._id}">
+                  <h3>${cars.cars[i].make}</h3>
+                  </a>
+                  <p><b>Model: </b>${cars.cars[i].model},<b>Year: </b> ${cars.cars[i].year}</p>
+                  <p>$${cars.cars[i].pricePerHour} per hour</p>
+                  <p>$${cars.cars[i].pricePerWeek} per week</p>
+                  <img src="${cars.cars[i].picture}" width="100px">
+                  `
+                });
+                marker.addListener('click',function(){
+                  infoWindow.open(map,marker);
+                });
+
+
+            };
+            addMarker();
+          }
+        })
+        
+        })
+
+    </script>
+
+
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=initMap&v=weekly"
+      defer
+    ></script>
+  </body>
+</html>

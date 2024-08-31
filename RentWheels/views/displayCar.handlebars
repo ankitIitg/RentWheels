@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card" style="width: 23rem;">
+            <img src="{{car.picture}}" class="card-img-top" alt="..." style="padding-top:40px;">
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card-body">
+                <h5 class="card-title">{{car.make}}</h5>
+                <p class="card-text">Model: {{car.model}}, year: {{car.year}}</p>
+                <p class="card-text">${{car.pricePerHour}} per hour, ${{car.pricePerWeek}} per week</p>
+                <small>Location: {{car.location}}</small>   
+            </div>
+             <a href="/contactOwner/{{car.owner}}" class="btn btn-primary" style="margin-bottom:5px; margin-left:15px;">Contact Owner</a>
+            <br>
+            <a href="/RentCar/{{car._id}}" class="btn btn-danger" style="margin-bottom:5px; margin-left:15px;">Rent Now</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+

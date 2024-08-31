@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm 4">
+            <div class="card" style="width: 18rem;">
+            <img src="{{car.picture}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{car.make}} {{car.model}} </h5>
+                <p class="card-text">{{car.pricePerWeek}}/week </p>
+                <p class="card-text">{{car.pricePerHour}}/hour </p>
+                <a href="/contactOwner/{{car.owner}}" class="btn btn-primary">Contact Owner</a>
+            </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <form action="/calculateTotal/{{car._id}}" method="POST">
+            <div class="form-group">
+                <label for="hour">How long do you rent?</label>
+                <select name="hour" class="form-control">
+                  <option value="1">1 hr</option>
+                  <option value="2">2 hrs</option>
+                  <option value="3">3 hrs</option>
+                  <option value="4">4 hrs</option>
+                  <option value="5">5 hrs</option>
+                  <option value="6">6 hrs</option>
+                </select>
+                <select name="week" class="form-control">
+                  <option value="1">1 wk</option>
+                  <option value="2">2 wk</option>
+                  <option value="3">3 wk</option>
+                  <option value="4">4 wk</option>
+                  <option value="5">5 wk</option>
+                  <option value="6">6 wk</option>
+                </select>
+                <div class="form-group">
+                    <button type="submit" class="form-control btn btn-danger">Calculate Total</button>
+                </div>
+            </div>
+            </form>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+</div>

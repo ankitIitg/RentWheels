@@ -1,0 +1,86 @@
+    
+
+<div class="row">
+    <div class="col-sm"></div>
+
+    <div class="col-sm-5">
+        <form action="/listCar2" method="POST">
+        <input type="hidden" name="carID" value="{{car._id}}">
+
+          <div class="form-group">
+            <label for="pricePerHour">Price per hour</label>
+            <input type="number" name="pricePerHour" id="pricePerHour" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label for="pricePerWeek">Price per week</label>
+            <input type="number" name="pricePerWeek" id="pricePerWeek" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" name="location" id="location" class="form-control"
+            placeholder="street, city, state or zipcode" required >
+          </div>
+
+          <div class="form-group contact-button">
+            {{!-- <button class="btn btn-info upload-btn" type="button">Choose image</button> --}}
+            <input type="file" name="image" id="upload-input"  required>
+          </div>
+
+          <div class="form-group contact-button">
+            <button type="submit" class="btn btn-primary">List a car</button>
+          </div>
+        
+        </form>
+    </div>
+
+    <div class="col-sm"></div>
+
+</div>
+
+
+
+
+
+<script>
+  function initMap(){
+    var location = document.getElementById('location');
+    var Autocomplete=new google.maps.places.Autocomplete(location);
+  }
+</script>
+
+<script async
+    {{!-- src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUfag1Idgwyny6lSKNWne5UsLUj2uS8XA&libraries=places&callback=initMap" --}}
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7lTs5f3_1YfCZxLGcHk94JB0ViY5YaTs&callback=initMap"
+</script>
+
+
+<script>
+    
+
+    $(document).ready(function(){
+      $('.upload-btn').on('click',function(){
+        $('#upload-input').click();
+      });
+      $('#upload-input').on('change',function(){
+        var uploadInput = $('#upload-input');
+         if(uploadInput.val()!=''){
+          var formData=new FormData();
+          formData.append('image',uploadInput[0].files[0]);
+
+          $.ajax({
+            url: '/uploadImage',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(){
+              uploadInput.val('');
+            }
+          });
+        }        
+      });
+    });
+
+</script>

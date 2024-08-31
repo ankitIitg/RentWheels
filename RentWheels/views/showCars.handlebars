@@ -1,0 +1,36 @@
+{{#each cars}}
+ <div class="media row" >
+     <div class="col-sm">
+        <input type="hidden" id="carID" value="{{_id}}">
+      <img class="mr-3" src="/image/logo.png" width="100px" height="100px">
+     </div>
+
+     <div class="col-sm-7">
+        <div class="media-body">
+         <a href="/displayCar/{{_id}}"><h5 class="mt-0">{{make}} {{model}} {{year}} </h5></a>   
+        <div class="row">
+            {{#each image}}
+            <div class="col-sm">
+                <img src="{{imageUrl}}" class="img-fluid" alt="">
+            </div>
+            {{else}}
+            <img src="/image/images.png" alt="" height="100px" width="100px">
+            {{/each}}
+        </div>
+        <p>${{pricePerHour}} per hour</p>
+        <p>${{pricePerWeek}} per week</p>
+        {{!-- <p>{{owner.firstname}} </p> --}}
+        <small>location: {{location}}. </small>
+        {{!-- <small>{{date}} </small> --}}
+        
+      </div> 
+     </div>
+
+    <div class="col-sm"></div>
+</div>
+
+
+<hr>
+{{else}}
+<p>No cars found</p>
+{{/each}}

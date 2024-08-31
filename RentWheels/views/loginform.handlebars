@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm-4">
+             <form action="/login" method="POST">
+                {{#each success}}
+                <p class="green center">{{text}}</p>
+                {{/each}} 
+                {{#each errors}}
+                <p class="red center">{{text}}</p>
+                {{/each}} 
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" class="form-control">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-info contact-button">Login</button>
+                </div>
+             </form> 
+        </div>
+        <div class="col-sm"></div>
+    </div>
+</div>
